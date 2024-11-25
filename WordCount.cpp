@@ -52,33 +52,39 @@ int WordCount::getWordCount(std::string word) const {
 
 	
 int WordCount::incrWordCount(std::string word) {
-	size_t idx=hash(word);
-	int x=0;
-	for(std::pair<std::string, int> pair: table[idx] )
-	{
-		if(pair.first==word)
-		{
-		pair.second++;
-		x=pair.second;
-		}
-	}
-	table[idx].emplace_back(word,1);
-	return x;
+  word = makeValidWord(word);
+int key = hash(word);
+for (auto& pair : table[key]) {
+        if (pair.first == word) {
+            pair.second++;
+            return pair.second;
+        }
+    }
+    if (word != "") {
+        table[key].emplace_back(word, 1);
+        return 1;
+    }
+    else {
+        return 0;
+    }
 }
 
 int WordCount::decrWordCount(std::string word) {
-	size_t idx=hash(word);
-	int x=0;
-	for(std::pair<std::string, int> pair: table[idx] )
-	{
-		if(pair.first==word)
-		{
-		pair.second--;
-		x=pair.second;
-		}
-	}
-	table[idx].emplace_back(word,1);
-	return x;
+	word = makeValidWord(word);
+    int key = hash(word);
+    for (auto it = table[key].begin(); it != table[key].end(); it++) {
+        if (it->first == word) {
+            if (it->second > 1) {
+                it->second--;
+                return it->second;
+            }
+		else {
+                table[key].erase(it);
+                return 0;
+            }
+        }
+    }
+    return -1;
 }
 
 bool WordCount::isWordChar(char c) {
