@@ -39,6 +39,7 @@ int WordCount::getNumUniqueWords() const {
 }
 
 int WordCount::getWordCount(std::string word) const {
+    word = makeValidWord(word);
 	size_t idx = hash(word);
 		for(std::pair<std::string, int> pair: table[idx] )
 		{
