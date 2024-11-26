@@ -89,7 +89,12 @@ int WordCount::decrWordCount(std::string word) {
 
 bool WordCount::isWordChar(char c) {
 	
-	return  std::isalpha(c);
+	if( std::isalpha(c)==0){
+        return false;
+    }
+    else{
+        return true;
+    }
 }
 
 std::string WordCount::makeValidWord(std::string word) {
