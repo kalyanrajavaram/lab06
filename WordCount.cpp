@@ -94,14 +94,20 @@ bool WordCount::isWordChar(char c) {
 
 std::string WordCount::makeValidWord(std::string word) {
     std::string validWord;
+
+   
     for (size_t i = 0; i < word.size(); ++i) {
         if (isWordChar(word[i])) {
+            
             validWord += std::tolower(word[i]);
         } else if ((word[i] == '\'' || word[i] == '-') && i > 0 && i < word.size() - 1 &&
                    isWordChar(word[i - 1]) && isWordChar(word[i + 1])) {
+           
             validWord += word[i];
         }
     }
-    return validWord;
+
+    return validWord; 
 }
+
 
