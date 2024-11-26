@@ -102,18 +102,19 @@ std::string WordCount::makeValidWord(std::string word) {
 
     for (size_t i = 0; i < word.size(); ++i) {
         if (isWordChar(word[i])) {
-            // Add alphabetic characters to the valid word, converted to lowercase
+            // Add alphabetic characters to the valid word in lowercase
             validWord += std::tolower(word[i]);
         } else if ((word[i] == '\'' || word[i] == '-') &&
                    i > 0 && i < word.size() - 1 &&
                    isWordChar(word[i - 1]) && isWordChar(word[i + 1])) {
-            // Retain hyphens and apostrophes if surrounded by valid characters
+            // Retain hyphens/apostrophes if surrounded by valid characters
             validWord += word[i];
         }
     }
 
     return validWord;
 }
+
 
 
 
